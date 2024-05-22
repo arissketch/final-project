@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  # Routes for the Photo resource:
+  get("/", { :controller => "bathrooms", :action => "index" })
 
+  # Routes for the Photo resource:
+  
   # CREATE
   post("/insert_photo", { :controller => "photos", :action => "create" })
           
@@ -60,7 +62,8 @@ Rails.application.routes.draw do
 
   # CREATE
   post("/insert_bathroom", { :controller => "bathrooms", :action => "create" })
-          
+  get("/add_bathroom", { :controller => "bathrooms", :action => "insert" })
+         
   # READ
   get("/bathrooms", { :controller => "bathrooms", :action => "index" })
   

@@ -4,6 +4,25 @@ class BathroomsController < ApplicationController
 
     @list_of_bathrooms = matching_bathrooms.order({ :created_at => :desc })
 
+    @locations = [
+  {
+    "id" => 1,
+    "lat" => 41.8381065,
+    "lng" => -87.6512738,
+    "name" => "House of Cakes",
+    "address" => "6189 N Canfield Ave, Chicago, IL 60631, USA",
+    "description" => "Straight up somebody's house. They bake cakes in their pajamas.",
+  },
+  {
+    "id" => 2,
+    "lat" => 41.9100984,
+    "lng" => -87.6852883,
+    "name" => "Handlebar",
+    "address" => "2311 W North Ave, Chicago, IL 60647, USA",
+    "description" => "A bar with handles. Very easy to pick up! #LiftWithYourBack",
+  }
+]
+
     render({ :template => "bathrooms/index" })
   end
 

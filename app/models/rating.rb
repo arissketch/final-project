@@ -5,6 +5,7 @@
 #  id          :integer          not null, primary key
 #  cleaniness  :integer
 #  environment :integer
+#  overall     :integer
 #  safety      :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
