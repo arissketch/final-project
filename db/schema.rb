@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_22_203826) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_22_204048) do
   create_table "bathrooms", force: :cascade do |t|
     t.string "address"
     t.integer "comment_id"
     t.boolean "open_to_public"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
   end
 
   create_table "comments", force: :cascade do |t|

@@ -10,4 +10,6 @@
 #  user_id       :integer
 #
 class Photo < ApplicationRecord
+  belongs_to :user, required: true, class_name: "User", foreign_key: "user_id"
+  belongs_to :restaurants, required: true, class_name: "Bathroom", foreign_key: "bathroom_id"
 end
