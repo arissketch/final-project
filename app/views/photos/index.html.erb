@@ -1,0 +1,118 @@
+<div>
+  <div>
+    <h1>
+      List of all photos
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new photo
+    </h2>
+
+    <form action="/insert_photo" method="post">
+      <div>
+        <label for="image_address_box">
+          Image address
+        </label>
+
+        <input type="text" id="image_address_box" name="query_image_address">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id">
+      </div>
+
+      <div>
+        <label for="bathroom_id_box">
+          Bathroom
+        </label>
+
+        <input type="text" id="bathroom_id_box" name="query_bathroom_id">
+      </div>
+
+      <button>
+        Create photo
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Image address
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Bathroom
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_photos.each do |a_photo| %>
+      <tr>
+        <td>
+          <%= a_photo.id %>
+        </td>
+
+        <td>
+          <%= a_photo.image_address %>
+        </td>
+
+        <td>
+          <%= a_photo.user_id %>
+        </td>
+
+        <td>
+          <%= a_photo.bathroom_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_photo.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_photo.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/photos/<%= a_photo.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

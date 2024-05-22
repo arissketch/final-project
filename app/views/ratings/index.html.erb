@@ -1,0 +1,166 @@
+<div>
+  <div>
+    <h1>
+      List of all ratings
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new rating
+    </h2>
+
+    <form action="/insert_rating" method="post">
+      <div>
+        <label for="comment_id_box">
+          Comment
+        </label>
+
+        <input type="text" id="comment_id_box" name="query_comment_id">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id">
+      </div>
+
+      <div>
+        <label for="cleaniness_box">
+          Cleaniness
+        </label>
+
+        <input type="text" id="cleaniness_box" name="query_cleaniness">
+      </div>
+
+      <div>
+        <label for="safety_box">
+          Safety
+        </label>
+
+        <input type="text" id="safety_box" name="query_safety">
+      </div>
+
+      <div>
+        <label for="bathroom_id_box">
+          Bathroom
+        </label>
+
+        <input type="text" id="bathroom_id_box" name="query_bathroom_id">
+      </div>
+
+      <div>
+        <label for="environment_box">
+          Environment
+        </label>
+
+        <input type="text" id="environment_box" name="query_environment">
+      </div>
+
+      <button>
+        Create rating
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Comment
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Cleaniness
+        </th>
+
+        <th>
+          Safety
+        </th>
+
+        <th>
+          Bathroom
+        </th>
+
+        <th>
+          Environment
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_ratings.each do |a_rating| %>
+      <tr>
+        <td>
+          <%= a_rating.id %>
+        </td>
+
+        <td>
+          <%= a_rating.comment_id %>
+        </td>
+
+        <td>
+          <%= a_rating.user_id %>
+        </td>
+
+        <td>
+          <%= a_rating.cleaniness %>
+        </td>
+
+        <td>
+          <%= a_rating.safety %>
+        </td>
+
+        <td>
+          <%= a_rating.bathroom_id %>
+        </td>
+
+        <td>
+          <%= a_rating.environment %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_rating.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_rating.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/ratings/<%= a_rating.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

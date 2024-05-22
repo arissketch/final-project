@@ -1,0 +1,146 @@
+<div>
+  <div>
+    <h1>
+      Rating #<%= @the_rating.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/ratings">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_rating/<%= @the_rating.id %>">
+          Delete rating
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Comment
+      </dt>
+      <dd>
+        <%= @the_rating.comment_id %>
+      </dd>
+
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_rating.user_id %>
+      </dd>
+
+      <dt>
+        Cleaniness
+      </dt>
+      <dd>
+        <%= @the_rating.cleaniness %>
+      </dd>
+
+      <dt>
+        Safety
+      </dt>
+      <dd>
+        <%= @the_rating.safety %>
+      </dd>
+
+      <dt>
+        Bathroom
+      </dt>
+      <dd>
+        <%= @the_rating.bathroom_id %>
+      </dd>
+
+      <dt>
+        Environment
+      </dt>
+      <dd>
+        <%= @the_rating.environment %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_rating.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_rating.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit rating
+    </h2>
+
+    <form action="/modify_rating/<%= @the_rating.id %>"  method="post" >
+      <div>
+        <label for="comment_id_box">
+          Comment
+        </label>
+
+        <input type="text" id="comment_id_box" name="query_comment_id" value="<%= @the_rating.comment_id %>">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_rating.user_id %>">
+      </div>
+
+      <div>
+        <label for="cleaniness_box">
+          Cleaniness
+        </label>
+
+        <input type="text" id="cleaniness_box" name="query_cleaniness" value="<%= @the_rating.cleaniness %>">
+      </div>
+
+      <div>
+        <label for="safety_box">
+          Safety
+        </label>
+
+        <input type="text" id="safety_box" name="query_safety" value="<%= @the_rating.safety %>">
+      </div>
+
+      <div>
+        <label for="bathroom_id_box">
+          Bathroom
+        </label>
+
+        <input type="text" id="bathroom_id_box" name="query_bathroom_id" value="<%= @the_rating.bathroom_id %>">
+      </div>
+
+      <div>
+        <label for="environment_box">
+          Environment
+        </label>
+
+        <input type="text" id="environment_box" name="query_environment" value="<%= @the_rating.environment %>">
+      </div>
+
+      <button>
+        Update rating
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

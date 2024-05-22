@@ -1,0 +1,116 @@
+<div>
+  <div>
+    <h1>
+      List of all bathrooms
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new bathroom
+    </h2>
+
+    <form action="/insert_bathroom" method="post">
+      <div>
+        <label for="address_box">
+          Address
+        </label>
+
+        <input type="text" id="address_box" name="query_address">
+      </div>
+
+      <div>
+        <label for="comment_id_box">
+          Comment
+        </label>
+
+        <input type="text" id="comment_id_box" name="query_comment_id">
+      </div>
+
+      <div>
+        <input type="checkbox" id="open_to_public_box" name="query_open_to_public" value="1">
+
+        <label for="open_to_public_box">Open to public</label>
+      </div>
+
+      <button>
+        Create bathroom
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Address
+        </th>
+
+        <th>
+          Comment
+        </th>
+
+        <th>
+          Open to public
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_bathrooms.each do |a_bathroom| %>
+      <tr>
+        <td>
+          <%= a_bathroom.id %>
+        </td>
+
+        <td>
+          <%= a_bathroom.address %>
+        </td>
+
+        <td>
+          <%= a_bathroom.comment_id %>
+        </td>
+
+        <td>
+          <%= a_bathroom.open_to_public %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_bathroom.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_bathroom.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/bathrooms/<%= a_bathroom.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
