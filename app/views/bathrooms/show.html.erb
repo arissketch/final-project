@@ -123,7 +123,7 @@
       <% @list_of_comments.each do |a_comment| %>
       <tr>
         <td>
-    <% matching_ratings = Rating.where({ :comment_id => a_comment.id }) %>
+    <% matching_ratings = Rating.where({ :bathroom_id => @the_bathroom.id }) %>
     <% the_rating = matching_ratings.at(0) %>
     <%= the_rating.overall %>
         </td>
