@@ -12,6 +12,20 @@ class BathroomsController < ApplicationController
     render({ :template => "bathrooms/index" })
   end
 
+  def public
+    matching_public = Bathroom.where({:open_to_public => :true})
+    @list_of_public = matching_public.order({ :created_at => :desc })
+    render({ :template => "bathrooms/public" })
+
+  end
+
+  def private
+    matching_privates = Bathroom.where({:open_to_public => :false})
+    @list_of_privates=matching_privates.order({ :created_at => :desc })
+    render({ :template => "bathrooms/private" })
+
+  end
+
   def show
     the_id = params.fetch("path_id")
 

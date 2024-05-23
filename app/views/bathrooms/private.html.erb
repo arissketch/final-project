@@ -1,0 +1,67 @@
+
+
+
+<div>
+ <a href="/public">Public Bathrooms </a>
+
+</div>
+
+<h1> Private bathrooms</h1>
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          Name
+        </th>
+
+        <th>
+          Overall Ratings
+        </th>
+
+        <th>
+          Open to public
+        </th>
+
+      </tr>
+
+      <% @list_of_privates.each do |a_bathroom| %>
+      <tr>
+        <td>
+        <a href="/bathrooms/<%= a_bathroom.id %>">
+          
+          <%= a_bathroom.name %></a>
+        </td>
+
+        <td>
+        
+        <% matching_ratings = Rating.where({ :bathroom_id => a_bathroom.id }) %>
+        <%list_of_ratings = matching_ratings.order({ :created_at => :desc })%>
+        
+        <% the_rating = matching_ratings.at(0) %>
+        <% if the_rating != nil%>
+        <% avg_overall=list_of_ratings.average(:overall)%>
+       <%= avg_overall.to_f.round(1) %>
+        <% else%>
+        No reviews
+        <%end%>
+  
+        </td>
+
+        <td>
+        <% if a_bathroom.open_to_public %>
+          public
+        <%else%>
+          private
+          <%end%>
+        </td>
+
+
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

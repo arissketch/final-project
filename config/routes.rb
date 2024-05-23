@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   get("/", { :controller => "bathrooms", :action => "index" })
+  get("/public",{ :controller => "bathrooms", :action => "public" })
+  get("/private",{ :controller => "bathrooms", :action => "private" })
+
   get("/add_rating/:path_id",{ :controller => "ratings", :action => "insert" })
 
   # Routes for the Photo resource:
