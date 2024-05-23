@@ -1,8 +1,26 @@
 class BathroomsController < ApplicationController
+
   def index
     matching_bathrooms = Bathroom.all
 
     @list_of_bathrooms = matching_bathrooms.order({ :created_at => :desc })
+
+    @gmaps_key = ENV.fetch("GMAPS_KEY")
+
+    gmaps_url = "https://maps.googleapis.com/maps/api/geocode/json?address=chicago&key=#{@gmaps_key}"
+
+    raw_gmaps_data = HTTP.get(gmaps_url)
+
+    parsed_gmaps_data = JSON.parse(raw_gmaps_data)
+    results_array = parsed_gmaps_data.fetch("results")
+    first_result_hash = results_array.at(0)
+    geometry_hash = first_result_hash.fetch("geometry")
+    location_hash = geometry_hash.fetch("location")
+    @latitude = location_hash.fetch("lat")
+    @longitude = location_hash.fetch("lng")
+
+
+
 
     @locations = [
   {
@@ -41,10 +59,32 @@ class BathroomsController < ApplicationController
   end
 
   def create
+
+    gmaps_key = ENV.fetch("GMAPS_KEY")
+    fetched_address=params.fetch("query_address")
+    gmaps_address=fetched_address.gsub(/\s+/, '')
+
+
+    gmaps_url = "https://maps.googleapis.com/maps/api/geocode/json?address=#{gmaps_address}&key=#{gmaps_key}"
+
+    raw_gmaps_data = HTTP.get(gmaps_url)
+
+    parsed_gmaps_data = JSON.parse(raw_gmaps_data)
+    results_array = parsed_gmaps_data.fetch("results")
+    first_result_hash = results_array.at(0)
+    geometry_hash = first_result_hash.fetch("geometry")
+    location_hash = geometry_hash.fetch("location")
+  
+
     the_bathroom = Bathroom.new
     the_bathroom.address = params.fetch("query_address")
-    the_bathroom.comment_id = params.fetch("query_comment_id")
+    the_bathroom.name = params.fetch("query_name")
     the_bathroom.open_to_public = params.fetch("query_open_to_public", false)
+
+    the_bathroom.longitude=location_hash.fetch("lng")
+    the_bathroom.latitude=location_hash.fetch("lat")
+
+
 
     if the_bathroom.valid?
       the_bathroom.save

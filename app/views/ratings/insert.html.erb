@@ -1,0 +1,53 @@
+    <h1>
+      <%= @the_bathroom.name %>
+    </h1>
+
+<div>
+  <div>
+    <h2>
+      Add a new rating
+    </h2>
+
+    <form action="/insert_rating/<%=@the_bathroom.id%>" method="post">
+    <% if current_user != nil %>
+      <div>
+        <label for="comment_id_box">
+          Comment
+        </label>
+
+        <input type="text" id="comment_id_box" name="query_comment_id">
+      </div>
+
+      <div>
+        <label for="cleaniness_box">
+          Cleaniness
+        </label>
+
+        <input type="text" id="cleaniness_box" name="query_cleaniness">
+      </div>
+
+      <div>
+        <label for="safety_box">
+          Safety
+        </label>
+
+        <input type="text" id="safety_box" name="query_safety">
+      </div>
+
+      <div>
+        <label for="environment_box">
+          Environment
+        </label>
+
+        <input type="text" id="environment_box" name="query_environment">
+      </div>
+
+      <button>
+        Create rating
+      </button>
+    </form>
+<% else %>
+      <p>You must <a href="/users/sign_in">sign in</a> to add a bathroom.</p>
+<% end %>
+  </div>
+</div>

@@ -105,6 +105,7 @@ GEM
     crack (0.4.5)
       rexml
     crass (1.0.6)
+    csv (3.3.0)
     date (3.3.3)
     debug (1.7.2)
       irb (>= 1.5.0)
@@ -144,6 +145,9 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
+    geocoder (1.8.3)
+      base64 (>= 0.1.0)
+      csv (>= 3.0.0)
     git (1.18.0)
       addressable (~> 2.8)
       rchardet (~> 1.8)
@@ -417,6 +421,7 @@ DEPENDENCIES
   draft_generators
   draft_matchers
   faker
+  geocoder
   grade_runner
   htmlbeautifier
   http

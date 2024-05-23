@@ -20,7 +20,7 @@ class RatingsController < ApplicationController
   def create
     the_rating = Rating.new
     the_rating.comment_id = params.fetch("query_comment_id")
-    the_rating.user_id = params.fetch("query_user_id")
+    the_rating.user_id = current_user.id
     the_rating.cleaniness = params.fetch("query_cleaniness")
     the_rating.safety = params.fetch("query_safety")
     the_rating.bathroom_id = params.fetch("query_bathroom_id")
@@ -60,5 +60,12 @@ class RatingsController < ApplicationController
     the_rating.destroy
 
     redirect_to("/ratings", { :notice => "Rating deleted successfully."} )
+  end
+
+  def insert
+    the_bathroom_id=params.fetch("path_id")
+    @the_bathroom=Bathroom.where({:id=> the_bathroom_id}).at(0)
+    render({ :template => "ratings/insert" })
+
   end
 end

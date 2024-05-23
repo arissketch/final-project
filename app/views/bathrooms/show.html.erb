@@ -36,23 +36,40 @@
   <td>        
     <% matching_ratings = Rating.where({ :bathroom_id => @the_bathroom.id }) %>
     <% the_rating = matching_ratings.at(0) %>
-    <%= the_rating.overall %>
+    <% if the_rating != nil%>
+       <%= the_rating.overall %>
+    <% else%>
+        No reviews
+    <%end%>
   </td>
   <td>
     <% matching_ratings = Rating.where({ :bathroom_id => @the_bathroom.id }) %>
     <% the_rating = matching_ratings.at(0) %>
-    <%= the_rating.cleaniness %>
+    <% if the_rating != nil%>
+       <%= the_rating.cleaniness %>
+    <% else%>
+        No reviews
+    <%end%>
+  
   </td>
   <td>
     <% matching_ratings = Rating.where({ :bathroom_id => @the_bathroom.id }) %>
     <% the_rating = matching_ratings.at(0) %>
-    <%= the_rating.safety %>
+    <% if the_rating != nil%>
+       <%= the_rating.safety %>
+    <% else%>
+        No reviews
+    <%end%>
   </td>
   <td>
     <% matching_ratings = Rating.where({ :bathroom_id => @the_bathroom.id }) %>
     
     <% the_rating = matching_ratings.at(0) %>
-    <%= the_rating.environment %>
+    <% if the_rating != nil%>
+       <%= the_rating.environment %>
+    <% else%>
+        No reviews
+    <%end%>
   </td>
 </tr>
 </table>
@@ -81,7 +98,7 @@
 <hr>
 <h2> Comments
 </h2>
-<a href="">Add comments</a>
+<a href="/add_rating/<%= @the_bathroom.id %>">Rate this bathroom</a>
 <div>
   <div>
     <table border="1">
@@ -118,8 +135,6 @@
         <td>
           <%= a_comment.comments %>
         </td>
-
-
 
         <td>
           <%= time_ago_in_words(a_comment.created_at) %> ago

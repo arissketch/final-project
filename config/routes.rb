@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get("/", { :controller => "bathrooms", :action => "index" })
+  get("/add_rating/:path_id",{ :controller => "ratings", :action => "insert" })
 
   # Routes for the Photo resource:
   
@@ -23,7 +24,7 @@ Rails.application.routes.draw do
   # Routes for the Rating resource:
 
   # CREATE
-  post("/insert_rating", { :controller => "ratings", :action => "create" })
+  post("/insert_rating/:bathroom_id", { :controller => "ratings", :action => "create" })
           
   # READ
   get("/ratings", { :controller => "ratings", :action => "index" })
