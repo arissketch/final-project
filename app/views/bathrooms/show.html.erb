@@ -1,22 +1,61 @@
 <div>
   <div>
-    <h1>
-      Bathroom #<%= @the_bathroom.id %> details
-    </h1>
 
-    <div>
       <div>
+      <div>
+
         <a href="/bathrooms">
           Go back
         </a>
-      </div>
 
-      <div>
         <a href="/delete_bathroom/<%= @the_bathroom.id %>">
           Delete bathroom
         </a>
+        <a href="/edit_bathroom/<%= @the_bathroom.id %>">
+          Edit bathroom
+        </a>
       </div>
     </div>
+
+    <h1>
+      <%= @the_bathroom.name %>
+    </h1>
+
+
+<hr>
+<table>
+  <th> Overall
+  </th>
+  <th>Cleanliness
+  </th>
+  <th>Safety
+  </th>
+  <th>Environment
+  </th>
+<tr>
+  <td>        
+    <% matching_ratings = Rating.where({ :bathroom_id => @the_bathroom.id }) %>
+    <% the_rating = matching_ratings.at(0) %>
+    <%= the_rating.overall %>
+  </td>
+  <td>
+    <% matching_ratings = Rating.where({ :bathroom_id => @the_bathroom.id }) %>
+    <% the_rating = matching_ratings.at(0) %>
+    <%= the_rating.cleaniness %>
+  </td>
+  <td>
+    <% matching_ratings = Rating.where({ :bathroom_id => @the_bathroom.id }) %>
+    <% the_rating = matching_ratings.at(0) %>
+    <%= the_rating.safety %>
+  </td>
+  <td>
+    <% matching_ratings = Rating.where({ :bathroom_id => @the_bathroom.id }) %>
+    
+    <% the_rating = matching_ratings.at(0) %>
+    <%= the_rating.environment %>
+  </td>
+</tr>
+</table>
 
     <dl>
       <dt>
@@ -25,76 +64,70 @@
       <dd>
         <%= @the_bathroom.address %>
       </dd>
-
-      <dt>
-        Comment
-      </dt>
-      <dd>
-        <%= @the_bathroom.comment_id %>
-      </dd>
-
       <dt>
         Open to public
       </dt>
       <dd>
-        <%= @the_bathroom.open_to_public %>
-      </dd>
+       <% if @the_bathroom.open_to_public == "true" %>
+          public
+        <%else%>
+          private
+          <%end%>      </dd>
 
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_bathroom.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_bathroom.updated_at) %> ago
-      </dd>
     </dl>
   </div>
 </div>
 
 <hr>
-
-
+<h2> Comments
+</h2>
+<a href="">Add comments</a>
 <div>
   <div>
-    <h2>
-      Edit bathroom
-    </h2>
+    <table border="1">
+      <tr>
+        <th>
+          Ratings
+        </th>
 
-    <form action="/modify_bathroom/<%= @the_bathroom.id %>"  method="post" >
-      <div>
-        <label for="address_box">
-          Address
-        </label>
+        <th>
+          User
+        </th>
 
-        <input type="text" id="address_box" name="query_address" value="<%= @the_bathroom.address %>">
-      </div>
+        <th>
+          Comments
+        </th>
+        <th>
+          Created at
+        </th>
 
-      <div>
-        <label for="comment_id_box">
-          Comment
-        </label>
+      </tr>
 
-        <input type="text" id="comment_id_box" name="query_comment_id" value="<%= @the_bathroom.comment_id %>">
-      </div>
+      <% @list_of_comments.each do |a_comment| %>
+      <tr>
+        <td>
+    <% matching_ratings = Rating.where({ :comment_id => a_comment.id }) %>
+    <% the_rating = matching_ratings.at(0) %>
+    <%= the_rating.overall %>
+        </td>
 
-      <div>
-        <input type="checkbox" id="open_to_public_box" name="query_open_to_public" value="1" <%= "checked" if @the_bathroom.open_to_public %>>
+        <td>
+          <%= a_comment.user_id %>
+        </td>
 
-        <label for="open_to_public_box">
-            Open to public
-        </label>
-      </div>
+        <td>
+          <%= a_comment.comments %>
+        </td>
 
-      <button>
-        Update bathroom
-      </button>
-    </form>
+
+
+        <td>
+          <%= time_ago_in_words(a_comment.created_at) %> ago
+        </td>
+
+      </tr>
+      <% end %>
+    </table>
   </div>
 </div>
 

@@ -33,6 +33,10 @@ class BathroomsController < ApplicationController
 
     @the_bathroom = matching_bathrooms.at(0)
 
+    matching_comments = Comment.where({:bathroom_id => the_id})
+
+    @list_of_comments = matching_comments.order({ :created_at => :desc })
+
     render({ :template => "bathrooms/show" })
   end
 
@@ -73,5 +77,13 @@ class BathroomsController < ApplicationController
     the_bathroom.destroy
 
     redirect_to("/bathrooms", { :notice => "Bathroom deleted successfully."} )
+  end
+  def edit
+    the_id = params.fetch("path_id")
+
+    matching_bathrooms = Bathroom.where({ :id => the_id })
+
+    @the_bathroom = matching_bathrooms.at(0)
+    render({ :template => "bathrooms/edit" })
   end
 end

@@ -1,0 +1,37 @@
+<div>
+  <div>
+    <h3>
+      Edit bathroom
+    </h3>
+
+    <form action="/modify_bathroom/<%= @the_bathroom.id %>"  method="post" >
+      <div>
+        <label for="address_box">
+          Address
+        </label>
+
+        <input type="text" id="address_box" name="query_address" value="<%= @the_bathroom.address %>">
+      </div>
+
+      <div>
+        <label for="comment_id_box">
+          Comment
+        </label>
+
+        <input type="text" id="comment_id_box" name="query_comment_id" value="<%= @the_bathroom.comment_id %>">
+      </div>
+
+      <div>
+        <input type="checkbox" id="open_to_public_box" name="query_open_to_public" value="1" <%= "checked" if @the_bathroom.open_to_public %>>
+
+        <label for="open_to_public_box">
+            Open to public
+        </label>
+      </div>
+
+      <button>
+        Update bathroom
+      </button>
+    </form>
+  </div>
+</div>

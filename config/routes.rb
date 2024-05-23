@@ -68,6 +68,8 @@ Rails.application.routes.draw do
   get("/bathrooms", { :controller => "bathrooms", :action => "index" })
   
   get("/bathrooms/:path_id", { :controller => "bathrooms", :action => "show" })
+  get("/edit_bathroom/:path_id", {:controller=>"bathrooms", :action=> "edit"})
+
   
   # UPDATE
   
