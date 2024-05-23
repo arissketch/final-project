@@ -37,7 +37,7 @@
     <% matching_ratings = Rating.where({ :bathroom_id => @the_bathroom.id }) %>
     <% the_rating = matching_ratings.at(0) %>
     <% if the_rating != nil%>
-       <%= @avg_overall %>
+       <%= @avg_overall.round(1) %>
     <% else%>
         No reviews
     <%end%>
@@ -46,7 +46,7 @@
     <% matching_ratings = Rating.where({ :bathroom_id => @the_bathroom.id }) %>
     <% the_rating = matching_ratings.at(0) %>
     <% if the_rating != nil%>
-       <%= @avg_cleanliness %>
+       <%= @avg_cleanliness.round(1) %>
     <% else%>
         No reviews
     <%end%>
@@ -56,7 +56,7 @@
     <% matching_ratings = Rating.where({ :bathroom_id => @the_bathroom.id }) %>
     <% the_rating = matching_ratings.at(0) %>
     <% if the_rating != nil%>
-       <%= @avg_safety %>
+       <%= @avg_safety.round(1) %>
     <% else%>
         No reviews
     <%end%>
@@ -66,7 +66,7 @@
     
     <% the_rating = matching_ratings.at(0) %>
     <% if the_rating != nil%>
-       <%= @avg_environment %>
+       <%= @avg_environment.round(1) %>
     <% else%>
         No reviews
     <%end%>
@@ -85,7 +85,7 @@
         Open to public
       </dt>
       <dd>
-       <% if @the_bathroom.open_to_public == "true" %>
+       <% if @the_bathroom.open_to_public %>
           public
         <%else%>
           private
@@ -123,7 +123,7 @@
       <tr>
         <td>
 
-    <%= a_rate.overall %>
+    <%= a_rate.overall.to_f.round(1) %>
         </td>
 
         <td>

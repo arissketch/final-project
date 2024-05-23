@@ -3,6 +3,11 @@
     <h1>
       Rating #<%= @the_rating.id %> details
     </h1>
+    <h3>
+    <% matching_bathroom= Bathroom.where({:id=> @the_rating.bathroom_id})%>
+    <% the_bathroom=matching_bathroom.at(0)%>
+    <%= the_bathroom.name%>
+    </h3>
 
     <div>
       <div>
@@ -17,7 +22,7 @@
         </a>
       </div>
     </div>
-
+<hr>
     <dl>
       <dt>
         Comment
@@ -26,12 +31,6 @@
         <%= @the_rating.comment %>
       </dd>
 
-      <dt>
-        User
-      </dt>
-      <dd>
-        <%= @the_rating.user.username %>
-      </dd>
 
       <dt>
         Cleaniness
@@ -45,13 +44,6 @@
       </dt>
       <dd>
         <%= @the_rating.safety %>
-      </dd>
-
-      <dt>
-        Bathroom
-      </dt>
-      <dd>
-        <%= @the_rating.bathroom_id %>
       </dd>
 
       <dt>

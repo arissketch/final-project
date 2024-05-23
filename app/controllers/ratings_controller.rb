@@ -25,7 +25,7 @@ class RatingsController < ApplicationController
     the_rating.safety = params.fetch("query_safety")
     the_rating.bathroom_id = params.fetch("bathroom_id")
     the_rating.environment = params.fetch("query_environment")
-    the_rating.overall=(the_rating.cleaniness+the_rating.environment+the_rating.safety)/3
+    the_rating.overall=(the_rating.cleaniness.to_f+the_rating.environment.to_f+the_rating.safety.to_f)/3.to_f.round(1)
 
     if the_rating.valid?
       the_rating.save

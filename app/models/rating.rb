@@ -6,7 +6,7 @@
 #  cleaniness  :integer
 #  comment     :string
 #  environment :integer
-#  overall     :integer
+#  overall     :float
 #  photo       :string
 #  safety      :integer
 #  created_at  :datetime         not null

@@ -1,19 +1,18 @@
 <div>
   <div>
     <h1>
-      Find a bathroom near me
-    </h1>
+      Flushie!</h1><h2> Find a bathroom near me</h2>
+    
   </div>
 </div>
 
 <hr>
-<%=@gmaps_key%>
+
 <div>
  <a href="/add_bathroom">Add a new bathroom </a>
 
 </div>
 
-Your location is <%=@latitude%> and <%=@longitude%>.
 <div>
   <div id="map" style='width: 800px; height: 400px;'></div>
 </div>
@@ -27,29 +26,28 @@ function initMap() {
   // An empty bounds variable for seeding automatic zoom level (bounds of map)
   var bounds = new google.maps.LatLngBounds();
 
-  <%  @locations.each do |place|   %>
+  <%  @list_of_bathrooms.each do |place|   %>
 
-  // Make info window for this place
-  var infowindow_<%= place.fetch("id") %> = new google.maps.InfoWindow({
-    content: "<b><%= place.fetch("name") %></b>" 
+    // Make info window for this place
+  var infowindow_<%= place.id %> = new google.maps.InfoWindow({
+    content: "<b><%= place.name %></b>" 
+  });
+
+  // Make marker for this place
+  var marker_<%= place.id %> = new google.maps.Marker({
+    position: {lat: <%= place.latitude %>, lng: <%= place.longitude %>},
+    map: map,
+    title: "<%= place.name %>",
+    icon: 'http://maps.google.com/mapfiles/ms/icons/pink-dot.png'
   });
 
   // Click to show info window
-  marker_<%= place.fetch("id") %>.addListener('click', function() {
-    infowindow_<%= place.fetch("id") %>.open(map, marker_<%= place.fetch("id") %>);
-  });
-
-  
-  // Make marker for this place
-  var marker_<%= place.fetch("id") %> = new google.maps.Marker({
-    position: {lat: <%= place.fetch("lat") %>, lng: <%= place.fetch("lng") %>},
-    map: map,
-    title: "<%= place.fetch("name") %>",
-    icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+  marker_<%= place.id %>.addListener('click', function() {
+    infowindow_<%= place.id %>.open(map, marker_<%= place.id %>);
   });
 
   // Add this marker in map bounds
-  bounds.extend(new google.maps.LatLng(<%= place.fetch("lat") %>, <%= place.fetch("lng") %>));
+  bounds.extend(new google.maps.LatLng(<%= place.latitude %>, <%= place.longitude %>));
 
   <% end %>
 
@@ -57,15 +55,12 @@ function initMap() {
 };
 
 </script>
-
-
 <script src="https://maps.googleapis.com/maps/api/js?key=<%=@gmaps_key%>&callback=initMap"
 async defer></script>
 
 
 
 <hr>
-# table of bathrooms #
 <div>
   <div>
     <table border="1">
@@ -75,30 +70,32 @@ async defer></script>
         </th>
 
         <th>
-          Ratings
+          Overall Ratings
         </th>
 
         <th>
           Open to public
         </th>
-        <th>
-          
-        </th>
+
       </tr>
 
       <% @list_of_bathrooms.each do |a_bathroom| %>
       <tr>
         <td>
-          <%= a_bathroom.name %>
+        <a href="/bathrooms/<%= a_bathroom.id %>">
+          
+          <%= a_bathroom.name %></a>
         </td>
 
         <td>
         
         <% matching_ratings = Rating.where({ :bathroom_id => a_bathroom.id }) %>
+        <%list_of_ratings = matching_ratings.order({ :created_at => :desc })%>
         
         <% the_rating = matching_ratings.at(0) %>
         <% if the_rating != nil%>
-       <%= the_rating.overall %>
+        <% avg_overall=list_of_ratings.average(:overall)%>
+       <%= avg_overall.to_f.round(1) %>
         <% else%>
         No reviews
         <%end%>
@@ -106,18 +103,14 @@ async defer></script>
         </td>
 
         <td>
-        <% if a_bathroom.open_to_public == "true" %>
+        <% if a_bathroom.open_to_public %>
           public
         <%else%>
           private
           <%end%>
         </td>
 
-        <td>
-          <a href="/bathrooms/<%= a_bathroom.id %>">
-            Show details
-          </a>
-        </td>
+
       </tr>
       <% end %>
     </table>

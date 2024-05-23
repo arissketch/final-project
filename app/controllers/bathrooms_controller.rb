@@ -4,43 +4,10 @@ class BathroomsController < ApplicationController
     matching_bathrooms = Bathroom.all
 
     @list_of_bathrooms = matching_bathrooms.order({ :created_at => :desc })
+    @safest_bathrooms = matching_bathrooms.order({:safety => :desc})
+    @cleaniest_bathrooms=matching_bathrooms.order({:cleaniness => :desc})
 
     @gmaps_key = ENV.fetch("GMAPS_KEY")
-
-    gmaps_url = "https://maps.googleapis.com/maps/api/geocode/json?address=chicago&key=#{@gmaps_key}"
-
-    raw_gmaps_data = HTTP.get(gmaps_url)
-
-    parsed_gmaps_data = JSON.parse(raw_gmaps_data)
-    results_array = parsed_gmaps_data.fetch("results")
-    first_result_hash = results_array.at(0)
-    geometry_hash = first_result_hash.fetch("geometry")
-    location_hash = geometry_hash.fetch("location")
-    @latitude = location_hash.fetch("lat")
-    @longitude = location_hash.fetch("lng")
-
-
-
-
-
-    @locations = [
-  {
-    "id" => 1,
-    "lat" => 41.8381065,
-    "lng" => -87.6512738,
-    "name" => "House of Cakes",
-    "address" => "6189 N Canfield Ave, Chicago, IL 60631, USA",
-    "description" => "Straight up somebody's house. They bake cakes in their pajamas.",
-  },
-  {
-    "id" => 2,
-    "lat" => 41.9100984,
-    "lng" => -87.6852883,
-    "name" => "Handlebar",
-    "address" => "2311 W North Ave, Chicago, IL 60647, USA",
-    "description" => "A bar with handles. Very easy to pick up! #LiftWithYourBack",
-  }
-]
 
     render({ :template => "bathrooms/index" })
   end
