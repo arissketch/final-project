@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_23_011731) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_23_031137) do
   create_table "bathrooms", force: :cascade do |t|
     t.string "address"
     t.integer "comment_id"
@@ -39,7 +39,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_23_011731) do
   end
 
   create_table "ratings", force: :cascade do |t|
-    t.integer "comment_id"
     t.integer "user_id"
     t.integer "cleaniness"
     t.integer "safety"
@@ -48,6 +47,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_23_011731) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "overall"
+    t.string "comment"
+    t.string "photo"
   end
 
   create_table "users", force: :cascade do |t|

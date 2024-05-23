@@ -19,16 +19,16 @@ class RatingsController < ApplicationController
 
   def create
     the_rating = Rating.new
-    the_rating.comment_id = params.fetch("query_comment_id")
+    the_rating.comment = params.fetch("query_comment")
     the_rating.user_id = current_user.id
     the_rating.cleaniness = params.fetch("query_cleaniness")
     the_rating.safety = params.fetch("query_safety")
-    the_rating.bathroom_id = params.fetch("query_bathroom_id")
+    the_rating.bathroom_id = params.fetch("bathroom_id")
     the_rating.environment = params.fetch("query_environment")
 
     if the_rating.valid?
       the_rating.save
-      redirect_to("/ratings", { :notice => "Rating created successfully." })
+      redirect_to("/bathrooms/bathroom_id", { :notice => "Rating created successfully." })
     else
       redirect_to("/ratings", { :alert => the_rating.errors.full_messages.to_sentence })
     end

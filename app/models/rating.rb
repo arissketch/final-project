@@ -4,13 +4,14 @@
 #
 #  id          :integer          not null, primary key
 #  cleaniness  :integer
+#  comment     :string
 #  environment :integer
 #  overall     :integer
+#  photo       :string
 #  safety      :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  bathroom_id :integer
-#  comment_id  :integer
 #  user_id     :integer
 #
 class Rating < ApplicationRecord
