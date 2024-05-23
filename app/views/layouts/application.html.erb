@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Rails Template</title>
+    <title>Flushie</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,7 @@
   </head>
 
   <body>
+  <a href="/">Flushie</a>
   <%if current_user !=nil %>
       <a href="/users/sign_out">Sign out</a>
       <a href="/users/edit">Edit Profile</a>

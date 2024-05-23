@@ -60,7 +60,7 @@ class RatingsController < ApplicationController
 
     the_rating.destroy
 
-    redirect_to("/ratings", { :notice => "Rating deleted successfully."} )
+    redirect_to("/bathrooms/#{the_rating.bathroom_id}", { :notice => "Rating deleted successfully."} )
   end
 
   def insert

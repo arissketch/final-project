@@ -37,7 +37,7 @@
     <% matching_ratings = Rating.where({ :bathroom_id => @the_bathroom.id }) %>
     <% the_rating = matching_ratings.at(0) %>
     <% if the_rating != nil%>
-       <%= the_rating.overall %>
+       <%= @avg_overall %>
     <% else%>
         No reviews
     <%end%>
@@ -46,7 +46,7 @@
     <% matching_ratings = Rating.where({ :bathroom_id => @the_bathroom.id }) %>
     <% the_rating = matching_ratings.at(0) %>
     <% if the_rating != nil%>
-       <%= the_rating.cleaniness %>
+       <%= @avg_cleanliness %>
     <% else%>
         No reviews
     <%end%>
@@ -56,7 +56,7 @@
     <% matching_ratings = Rating.where({ :bathroom_id => @the_bathroom.id }) %>
     <% the_rating = matching_ratings.at(0) %>
     <% if the_rating != nil%>
-       <%= the_rating.safety %>
+       <%= @avg_safety %>
     <% else%>
         No reviews
     <%end%>
@@ -66,7 +66,7 @@
     
     <% the_rating = matching_ratings.at(0) %>
     <% if the_rating != nil%>
-       <%= the_rating.environment %>
+       <%= @avg_environment %>
     <% else%>
         No reviews
     <%end%>
@@ -115,29 +115,27 @@
           Comments
         </th>
         <th>
-          Created at
         </th>
 
       </tr>
 
-      <% @list_of_comments.each do |a_comment| %>
+      <% @list_of_ratings.each do |a_rate| %>
       <tr>
         <td>
-    <% matching_ratings = Rating.where({ :bathroom_id => @the_bathroom.id }) %>
-    <% the_rating = matching_ratings.at(0) %>
-    <%= the_rating.overall %>
+
+    <%= a_rate.overall %>
         </td>
 
         <td>
-          <%= a_comment.user_id %>
+          <%= a_rate.user_id %>
         </td>
 
         <td>
-          <%= a_comment.comments %>
+          <%= a_rate.comment %>
         </td>
 
         <td>
-          <%= time_ago_in_words(a_comment.created_at) %> ago
+          <a href="/ratings/<%=a_rate.id%>"> Show details</a>
         </td>
 
       </tr>

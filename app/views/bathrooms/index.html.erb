@@ -34,17 +34,18 @@ function initMap() {
     content: "<b><%= place.fetch("name") %></b>" 
   });
 
+  // Click to show info window
+  marker_<%= place.fetch("id") %>.addListener('click', function() {
+    infowindow_<%= place.fetch("id") %>.open(map, marker_<%= place.fetch("id") %>);
+  });
+
+  
   // Make marker for this place
   var marker_<%= place.fetch("id") %> = new google.maps.Marker({
     position: {lat: <%= place.fetch("lat") %>, lng: <%= place.fetch("lng") %>},
     map: map,
     title: "<%= place.fetch("name") %>",
     icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
-  });
-
-  // Click to show info window
-  marker_<%= place.fetch("id") %>.addListener('click', function() {
-    infowindow_<%= place.fetch("id") %>.open(map, marker_<%= place.fetch("id") %>);
   });
 
   // Add this marker in map bounds

@@ -22,6 +22,7 @@ class BathroomsController < ApplicationController
 
 
 
+
     @locations = [
   {
     "id" => 1,
@@ -51,9 +52,15 @@ class BathroomsController < ApplicationController
 
     @the_bathroom = matching_bathrooms.at(0)
 
-    matching_comments = Comment.where({:bathroom_id => the_id})
+    matching_ratings = Rating.where({:bathroom_id => the_id})
 
-    @list_of_comments = matching_comments.order({ :created_at => :desc })
+    @list_of_ratings = matching_ratings.order({ :created_at => :desc })
+    @avg_overall=@list_of_ratings.average(:overall)
+    @avg_safety=@list_of_ratings.average(:safety)
+    @avg_cleanliness=@list_of_ratings.average(:cleaniness)
+    @avg_environment=@list_of_ratings.average(:environment)
+
+
 
     render({ :template => "bathrooms/show" })
   end

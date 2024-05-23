@@ -23,14 +23,14 @@
         Comment
       </dt>
       <dd>
-        <%= @the_rating.comment_id %>
+        <%= @the_rating.comment %>
       </dd>
 
       <dt>
         User
       </dt>
       <dd>
-        <%= @the_rating.user_id %>
+        <%= @the_rating.user.username %>
       </dd>
 
       <dt>
@@ -75,71 +75,6 @@
         <%= time_ago_in_words(@the_rating.updated_at) %> ago
       </dd>
     </dl>
-  </div>
-</div>
-
-<hr>
-
-
-<div>
-  <div>
-    <h2>
-      Edit rating
-    </h2>
-
-    <form action="/modify_rating/<%= @the_rating.id %>"  method="post" >
-      <div>
-        <label for="comment_id_box">
-          Comment
-        </label>
-
-        <input type="text" id="comment_id_box" name="query_comment_id" value="<%= @the_rating.comment_id %>">
-      </div>
-
-      <div>
-        <label for="user_id_box">
-          User
-        </label>
-
-        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_rating.user_id %>">
-      </div>
-
-      <div>
-        <label for="cleaniness_box">
-          Cleaniness
-        </label>
-
-        <input type="text" id="cleaniness_box" name="query_cleaniness" value="<%= @the_rating.cleaniness %>">
-      </div>
-
-      <div>
-        <label for="safety_box">
-          Safety
-        </label>
-
-        <input type="text" id="safety_box" name="query_safety" value="<%= @the_rating.safety %>">
-      </div>
-
-      <div>
-        <label for="bathroom_id_box">
-          Bathroom
-        </label>
-
-        <input type="text" id="bathroom_id_box" name="query_bathroom_id" value="<%= @the_rating.bathroom_id %>">
-      </div>
-
-      <div>
-        <label for="environment_box">
-          Environment
-        </label>
-
-        <input type="text" id="environment_box" name="query_environment" value="<%= @the_rating.environment %>">
-      </div>
-
-      <button>
-        Update rating
-      </button>
-    </form>
   </div>
 </div>
 
